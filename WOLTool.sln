@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WOLTool", "WOLTool\WOLTool.csproj", "{140698C6-DB41-4563-B781-1A3FA593F3C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WOLTool_Tests", "WOLTool_Tests\WOLTool_Tests.csproj", "{9929DFD8-C954-4501-8B58-276E4D154859}"
+	ProjectSection(ProjectDependencies) = postProject
+		{140698C6-DB41-4563-B781-1A3FA593F3C2} = {140698C6-DB41-4563-B781-1A3FA593F3C2}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{140698C6-DB41-4563-B781-1A3FA593F3C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{140698C6-DB41-4563-B781-1A3FA593F3C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{140698C6-DB41-4563-B781-1A3FA593F3C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9929DFD8-C954-4501-8B58-276E4D154859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9929DFD8-C954-4501-8B58-276E4D154859}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9929DFD8-C954-4501-8B58-276E4D154859}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9929DFD8-C954-4501-8B58-276E4D154859}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
