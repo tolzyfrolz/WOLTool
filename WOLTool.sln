@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35828.75 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WOLTool", "WOLTool.csproj", "{140698C6-DB41-4563-B781-1A3FA593F3C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WOLTool", "WOLTool\WOLTool.csproj", "{140698C6-DB41-4563-B781-1A3FA593F3C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
