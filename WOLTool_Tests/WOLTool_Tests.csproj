@@ -11,4 +11,8 @@
     <ProjectReference Include="..\WOLTool\WOLTool.csproj" />
   </ItemGroup>
 
+	<Target Name="RunTest" AfterTargets="Build">
+		<Exec Command="dotnet &quot;$(TargetPath)&quot;" />
+	</Target>
+
 </Project>
