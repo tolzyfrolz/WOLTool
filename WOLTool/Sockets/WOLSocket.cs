@@ -26,6 +26,16 @@ namespace WOLTool.Sockets
         }
 
         /// <summary>
+        /// Broadcasts a Wake-on-LAN magic packet to the specified MAC address.
+        /// </summary>
+        /// <param name="macAddress">MAC Address to wake in string format (will be parsed).</param>
+        public void Broadcast(string macAddress)
+        {
+            var physicalAddress = PhysicalAddress.Parse(macAddress);
+            Broadcast(physicalAddress);
+        }
+
+        /// <summary>
         /// Broadcasts a Wake-on-LAN magic packet to the specified MAC addresses.
         /// </summary>
         /// <param name="macAddresses">MAC Addresses to wake in string format (will be parsed).</param>
@@ -34,28 +44,6 @@ namespace WOLTool.Sockets
             var physicalAddresses = macAddresses
                 .Select(mac => PhysicalAddress.Parse(mac));
             Broadcast(physicalAddresses);
-        }
-
-        /// <summary>
-        /// Asynchronously Broadcasts a Wake-on-LAN magic packet to the specified MAC addresses.
-        /// </summary>
-        /// <param name="macAddresses">MAC Addresses to wake in string format (will be parsed).</param>
-        /// <returns>Task</returns>
-        public async Task BroadcastAsync(IEnumerable<string> macAddresses)
-        {
-            var physicalAddresses = macAddresses
-                .Select(mac => PhysicalAddress.Parse(mac));
-            await BroadcastAsync(physicalAddresses);
-        }
-
-        /// <summary>
-        /// Broadcasts a Wake-on-LAN magic packet to the specified MAC address.
-        /// </summary>
-        /// <param name="macAddress">MAC Address to wake in string format (will be parsed).</param>
-        public void Broadcast(string macAddress)
-        {
-            var physicalAddress = PhysicalAddress.Parse(macAddress);
-            Broadcast(physicalAddress);
         }
 
         /// <summary>
@@ -80,6 +68,18 @@ namespace WOLTool.Sockets
             {
                 Broadcast(macAddress);
             });
+        }
+
+        /// <summary>
+        /// Asynchronously Broadcasts a Wake-on-LAN magic packet to the specified MAC addresses.
+        /// </summary>
+        /// <param name="macAddresses">MAC Addresses to wake in string format (will be parsed).</param>
+        /// <returns>Task</returns>
+        public async Task BroadcastAsync(IEnumerable<string> macAddresses)
+        {
+            var physicalAddresses = macAddresses
+                .Select(mac => PhysicalAddress.Parse(mac));
+            await BroadcastAsync(physicalAddresses);
         }
 
         /// <summary>
