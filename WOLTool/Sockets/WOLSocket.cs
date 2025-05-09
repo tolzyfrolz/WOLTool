@@ -54,7 +54,7 @@ namespace WOLTool.Sockets
         public async Task BroadcastAsync(string macAddress)
         {
             var physicalAddress = PhysicalAddress.Parse(macAddress);
-            await BroadcastAsync(physicalAddress);
+            await BroadcastAsync(physicalAddress).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace WOLTool.Sockets
             await Task.Run(() =>
             {
                 Broadcast(macAddress);
-            });
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace WOLTool.Sockets
         {
             var physicalAddresses = macAddresses
                 .Select(mac => PhysicalAddress.Parse(mac));
-            await BroadcastAsync(physicalAddresses);
+            await BroadcastAsync(physicalAddresses).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace WOLTool.Sockets
             await Task.Run(() =>
             {
                 Broadcast(macAddresses);
-            });
+            }).ConfigureAwait(false);
         }
 
         #region Core Functionality
