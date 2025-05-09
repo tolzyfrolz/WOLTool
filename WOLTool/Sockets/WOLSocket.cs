@@ -70,25 +70,6 @@ namespace WOLTool.Sockets
         }
 
         /// <summary>
-        /// Broadcasts a Wake-on-LAN magic packet to the specified MAC address.
-        /// </summary>
-        /// <param name="macAddress">MAC Address to wake.</param>
-        public void Broadcast(PhysicalAddress macAddress) =>
-            Broadcast_Internal(macAddress);
-
-        /// <summary>
-        /// Broadcasts a Wake-on-LAN magic packet to the specified MAC addresses.
-        /// </summary>
-        /// <param name="macAddresses">MAC Addresses to wake.</param>
-        public void Broadcast(IEnumerable<PhysicalAddress> macAddresses)
-        {
-            foreach (var macAddress in macAddresses)
-            {
-                Broadcast_Internal(macAddress);
-            }
-        }
-
-        /// <summary>
         /// Asynchronously Broadcasts a Wake-on-LAN magic packet to the specified MAC address.
         /// </summary>
         /// <param name="macAddress">MAC Address to wake.</param>
@@ -114,6 +95,27 @@ namespace WOLTool.Sockets
             });
         }
 
+        #region Core Functionality
+
+        /// <summary>
+        /// Broadcasts a Wake-on-LAN magic packet to the specified MAC address.
+        /// </summary>
+        /// <param name="macAddress">MAC Address to wake.</param>
+        public void Broadcast(PhysicalAddress macAddress) =>
+            Broadcast_Internal(macAddress);
+
+        /// <summary>
+        /// Broadcasts a Wake-on-LAN magic packet to the specified MAC addresses.
+        /// </summary>
+        /// <param name="macAddresses">MAC Addresses to wake.</param>
+        public void Broadcast(IEnumerable<PhysicalAddress> macAddresses)
+        {
+            foreach (var macAddress in macAddresses)
+            {
+                Broadcast_Internal(macAddress);
+            }
+        }
+
         private void Broadcast_Internal(PhysicalAddress mac)
         {
             byte[] magicPacket = BuildMagicPacket(mac); // Get magic packet byte array based on MAC Address
@@ -137,5 +139,7 @@ namespace WOLTool.Sockets
             }
             return magicPacket; // 102 Byte Magic Packet
         }
+
+        #endregion
     }
 }
