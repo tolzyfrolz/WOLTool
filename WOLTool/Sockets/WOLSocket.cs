@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System;
 using System.Threading.Tasks;
-using WOLTool.Common;
 using System.Linq;
 
 namespace WOLTool.Sockets
@@ -121,17 +120,10 @@ namespace WOLTool.Sockets
 
         private void Broadcast_Internal(PhysicalAddress mac)
         {
-            try
+            byte[] magicPacket = BuildMagicPacket(mac); // Get magic packet byte array based on MAC Address
+            foreach (var ep in _endpoints) // Broadcast to *all* WOL Endpoints
             {
-                byte[] magicPacket = BuildMagicPacket(mac); // Get magic packet byte array based on MAC Address
-                foreach (var ep in _endpoints) // Broadcast to *all* WOL Endpoints
-                {
-                    _socket.SendTo(magicPacket, ep); // Broadcast magic packet
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new WOLException("ERROR broadcasting WakeOnLan Magic Packet.", ex);
+                _socket.SendTo(magicPacket, ep); // Broadcast magic packet
             }
         }
 
