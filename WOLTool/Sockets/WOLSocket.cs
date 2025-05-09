@@ -12,21 +12,17 @@ namespace WOLTool.Sockets
     /// A class that provides methods for sending Wake-on-LAN (WOL) magic packets to wake up computers on a network.
     /// Encapsulates a Socket object for sending UDP packets.
     /// </summary>
-    public sealed class WOLSocket : IDisposable
+    public sealed class WOLSocket : Socket
     {
-        private readonly Socket _socket;
         private static readonly IReadOnlyList<IPEndPoint> _endpoints = new List<IPEndPoint>
         {
             new IPEndPoint(IPAddress.Broadcast, 7), // echo
             new IPEndPoint(IPAddress.Broadcast, 9) // discard
         };
 
-        public WOLSocket()
+        public WOLSocket() : base(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
         {
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
-            {
-                EnableBroadcast = true // Enable broadcast, required for macOS compatibility
-            };
+            EnableBroadcast = true; // Enable broadcast, required for macOS compatibility
         }
 
         /// <summary>
@@ -123,7 +119,7 @@ namespace WOLTool.Sockets
             byte[] magicPacket = BuildMagicPacket(mac); // Get magic packet byte array based on MAC Address
             foreach (var ep in _endpoints) // Broadcast to *all* WOL Endpoints
             {
-                _socket.SendTo(magicPacket, ep); // Broadcast magic packet
+                this.SendTo(magicPacket, ep); // Broadcast magic packet
             }
         }
 
@@ -140,11 +136,6 @@ namespace WOLTool.Sockets
                 Buffer.BlockCopy(macBytes, 0, magicPacket, i, 6);
             }
             return magicPacket; // 102 Byte Magic Packet
-        }
-
-        public void Dispose()
-        {
-            _socket.Dispose();
         }
     }
 }
